@@ -1,4 +1,4 @@
-class Board(private val cells: Array<IntArray>, private val markedCells: Array<BooleanArray>, private var winned: Boolean = false) {
+class Board(private val cells: Array<IntArray>, private val markedCells: Array<BooleanArray>, private var won: Boolean = false) {
 
     private fun isWinningLine(index: Int): Boolean {
         return markedCells[index].all { it }
@@ -8,7 +8,7 @@ class Board(private val cells: Array<IntArray>, private val markedCells: Array<B
         return markedCells.map { line -> line[index] }.all { it }
     }
 
-    fun winned() = winned
+    fun won() = won
 
     fun sumOfUnmarkedCells() : Int {
         var total = 0
@@ -28,7 +28,7 @@ class Board(private val cells: Array<IntArray>, private val markedCells: Array<B
                 if (cell == number) {
                     markedCells[i][j] = true
                     if (isWinningLine(i) || isWinningColumn(j)) {
-                        winned = true
+                        won = true
                         return cell
                     }
                 }
@@ -68,9 +68,9 @@ class Bingo(private val numbersToDraw: List<Int>, private val boards: List<Board
     fun play2(): Int? {
         for (number in numbersToDraw) {
             for (board in boards) {
-                if (!board.winned()) {
+                if (!board.won()) {
                     val winning = board.markWith(number)
-                    if (winning != null && boards.all { it.winned() }) {
+                    if (winning != null && boards.all { it.won() }) {
                         return winning * board.sumOfUnmarkedCells()
                     }
                 }
