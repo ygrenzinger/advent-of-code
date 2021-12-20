@@ -1,4 +1,5 @@
 import java.util.stream.Stream
+import kotlin.streams.toList
 
 data class Lanternfish(val internalTimer: Int, val count: Long) {
     fun dayPassing() : Stream<Lanternfish> {
@@ -15,7 +16,7 @@ data class Lanternfish(val internalTimer: Int, val count: Long) {
 
 fun List<Lanternfish>.dayPassing() : List<Lanternfish> {
 
-    val fishes = this.parallelStream()
+    val fishes: List<Lanternfish> = this.parallelStream()
         .flatMap { it.dayPassing() }
         .toList()
     val newerCount = fishes.filter { it.internalTimer == 8 }.sumOf { it.count }
