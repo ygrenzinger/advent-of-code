@@ -2,6 +2,8 @@ import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 
+typealias Coordinate = Pair<Int, Int>
+
 /**
  * Reads lines from the given input txt file.
  */

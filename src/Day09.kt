@@ -1,5 +1,3 @@
-typealias Coordinate = Pair<Int, Int>
-
 fun main() {
 
     fun buildMap(input: List<String>): Map<Coordinate, Int> {
